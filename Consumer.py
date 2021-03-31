@@ -1,4 +1,3 @@
-# Import modules
 import socket 
 import json
 import sys
@@ -6,10 +5,10 @@ import os
 import time
 
 def Main(): 
-    host = '52.0.118.75'
-    port = 8080
-    '''host = "localhost"  
-    port = 8000'''
+    '''host = '52.0.118.75'
+    port = 8080'''
+    host = "localhost"  
+    port = 8000
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM) 
     s.connect((host,port))  # connect to server on local computer
     print('Connected')
@@ -44,17 +43,11 @@ def Main():
             break
 
         elif len(commands) == 4:
-            if commands[0] == "CONNECT":
-                if commands[1] == 'QUEUE':
+            if commands[0] == "connect":
+                if commands[1] == 'queue':
                     s.send(bytes(message, "utf-8")) 
                     data = s.recv(1024) 
                     print('Received from the server :',str(data.decode("utf-8")))
-
-                elif commands[1] == 'CHANNEL':
-                    s.send(bytes(message, "utf-8")) 
-                    data = s.recv(1024) 
-                    print('Received from the server :',str(data.decode("utf-8")))
-
                 else:
                     print('Invalid command: choose queue or channel to connect')
 
@@ -63,31 +56,19 @@ def Main():
 
 
         elif len(commands) == 2:
-            if commands[0] == "PULL":
-                if commands[1] == 'QUEUE':
+            if commands[0] == "pull":
+                if commands[1] == 'queue':
                     s.send(bytes(message, "utf-8")) 
                     data = s.recv(1024) 
                     print('Received from the server :',str(data.decode("utf-8")))
-
-                elif commands[1] == 'CHANNEL':
-                    s.send(bytes(message, "utf-8")) 
-                    data = s.recv(1024) 
-                    print('Received from the server :',str(data.decode("utf-8")))
-
                 else:
                     print('Invalid command: choose queue or channel to connect')
             
-            elif commands[0] == "LIST":
-                if commands[1] == 'QUEUE':
+            elif commands[0] == "list":
+                if commands[1] == 'queue':
                     s.send(bytes(message, "utf-8")) 
                     data = s.recv(1024) 
                     print('Received from the server :',str(data.decode("utf-8")))
-
-                elif commands[1] == 'CHANNEL':
-                    s.send(bytes(message, "utf-8")) 
-                    data = s.recv(1024) 
-                    print('Received from the server :',str(data.decode("utf-8")))
-
                 else:
                     print('Invalid command: choose queue or channel to list')
 
