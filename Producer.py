@@ -1,4 +1,3 @@
-# Import modules
 import socket 
 import json
 import sys
@@ -13,11 +12,13 @@ import time
 #       q message [# de la cola]
 
 def Main(): 
-    host = '52.0.118.75'
-    port = 8080
-    '''host = "localhost"  
-    port = 8000'''
+    '''host = '52.0.118.75'
+    port = 8080'''
+    host = "localhost"  
+    port = 8000
+
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM) 
+
     s.connect((host,port))  # connect to server on local computer 
     print('Connected')
 
@@ -31,7 +32,7 @@ def Main():
         user = data[0]
         password = data[1]
 
-            # Receive MOM's reply and decode
+        # Receive MOM's reply and decode
         resp = s.recv(1024)
         resp = str(resp.decode("utf-8"))
 
@@ -79,18 +80,16 @@ def Main():
                     response = str(response.decode("utf-8"))
                     print(response)
                 
-                #Message
                 elif command == 'message':
                     message = input("Ingresa el mensaje: ")
                     s.send(bytes(Id+" "+command+" "+message+" "+commands[2], "utf-8"))
-
                     response = s.recv(1024)
                     response = str(response.decode("utf-8"))
                     print(response)
                 else:
                     print("comando incorrecto")
             else:
-                print('there are only 2 options q or c')
+                print('use q fist')
 
         else:
             print('Invalid Command')
